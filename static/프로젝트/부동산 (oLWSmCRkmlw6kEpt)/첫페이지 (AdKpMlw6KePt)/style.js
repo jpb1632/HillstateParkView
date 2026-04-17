@@ -1343,3 +1343,157 @@ function initN5Reveal(sectionEl) {
     });
   });
 })();
+(function () {
+  var btn = document.getElementById('n5-mute-btn');
+  var iframe = document.getElementById('n5-yt-player');
+  if (!btn || !iframe) return;
+  var muted = true;
+  btn.addEventListener('click', function () {
+    muted = !muted;
+    iframe.contentWindow.postMessage(
+      JSON.stringify({ event: 'command', func: muted ? 'mute' : 'unMute', args: [] }),
+      '*'
+    );
+    if (!muted) {
+      iframe.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: 'setVolume', args: [80] }),
+        '*'
+      );
+    }
+    document.getElementById('n5-icon-muted').style.display = muted ? '' : 'none';
+    document.getElementById('n5-icon-unmuted').style.display = muted ? 'none' : '';
+    btn.title = muted ? '소리 켜기' : '소리 끄기';
+  });
+})();
+
+(function () {
+  var p8wrap = document.querySelector('.premium8-swiper');
+  if (!p8wrap || typeof Swiper === 'undefined') return;
+  var p8 = new Swiper(p8wrap, {
+    slidesPerView: 3,
+    spaceBetween: 16,
+    loop: true,
+    speed: 520,
+    autoplay: {
+      delay: 2200,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true
+    },
+    pagination: { el: '.premium8-pagination', clickable: true },
+    navigation: {
+      prevEl: '.premium8-prev',
+      nextEl: '.premium8-next'
+    },
+    breakpoints: {
+      0:   { slidesPerView: 1, spaceBetween: 12 },
+      640: { slidesPerView: 2, spaceBetween: 16 },
+      993: { slidesPerView: 3, spaceBetween: 16 }
+    }
+  });
+  document.querySelector('.premium8-prev').addEventListener('click', function(){ p8.slidePrev(); });
+  document.querySelector('.premium8-next').addEventListener('click', function(){ p8.slideNext(); });
+})();
+
+(function () {
+  if (!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  var cards = document.querySelectorAll('.properties-N6 .n6-hide-mobile .section-banner-card:not(.n6-section-banner)');
+  if (!cards.length) return;
+
+  cards.forEach(function (card) {
+    var images = Array.prototype.slice.call(card.querySelectorAll('img'));
+    if (!images.length) return;
+
+    var lens = document.createElement('div');
+    lens.className = 'n6-magnifier-lens';
+    card.appendChild(lens);
+
+    var zoom = 1.85;
+
+    function getActiveImage(clientX, clientY) {
+      for (var i = 0; i < images.length; i += 1) {
+        var rect = images[i].getBoundingClientRect();
+        if (clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom) {
+          return images[i];
+        }
+      }
+      return images[0];
+    }
+
+    function syncLensImage(targetImg) {
+      var src = targetImg.currentSrc || targetImg.src;
+      if (src && lens.dataset.src !== src) {
+        lens.style.backgroundImage = 'url("' + src + '")';
+        lens.dataset.src = src;
+      }
+    }
+
+    function moveLens(event) {
+      var cardRect = card.getBoundingClientRect();
+      var size = lens.offsetWidth || 190;
+      var radius = size / 2;
+      var x = event.clientX - cardRect.left;
+      var y = event.clientY - cardRect.top;
+      var clampedX = Math.max(radius, Math.min(cardRect.width - radius, x));
+      var clampedY = Math.max(radius, Math.min(cardRect.height - radius, y));
+      var activeImg = getActiveImage(event.clientX, event.clientY);
+      var imgRect = activeImg.getBoundingClientRect();
+      var imgX = Math.max(0, Math.min(imgRect.width, event.clientX - imgRect.left));
+      var imgY = Math.max(0, Math.min(imgRect.height, event.clientY - imgRect.top));
+
+      syncLensImage(activeImg);
+      lens.style.left = clampedX + 'px';
+      lens.style.top = clampedY + 'px';
+      lens.style.backgroundSize = imgRect.width * zoom + 'px ' + imgRect.height * zoom + 'px';
+      lens.style.backgroundPosition =
+        (-imgX * zoom + radius) + 'px ' + (-imgY * zoom + radius) + 'px';
+    }
+
+    syncLensImage(images[0]);
+
+    card.addEventListener('mouseenter', function (event) {
+      card.classList.add('is-magnifying');
+      moveLens(event);
+    });
+
+    card.addEventListener('mousemove', moveLens);
+
+    card.addEventListener('mouseleave', function () {
+      card.classList.remove('is-magnifying');
+    });
+  });
+})();
+
+(function () {
+  var wrap = document.querySelector('.landscape-swiper');
+  if (!wrap || typeof Swiper === 'undefined') return;
+
+  var landscape = new Swiper(wrap, {
+    slidesPerView: 1,
+    spaceBetween: 18,
+    centeredSlides: false,
+    loop: true,
+    speed: 650,
+    autoplay: {
+      delay: 2600,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true
+    },
+    pagination: {
+      el: '.landscape-pagination',
+      clickable: true
+    },
+    navigation: {
+      prevEl: '.landscape-prev',
+      nextEl: '.landscape-next'
+    },
+    breakpoints: {
+      640: { slidesPerView: 1, spaceBetween: 18, centeredSlides: false },
+      993: { slidesPerView: 1, spaceBetween: 22, centeredSlides: false },
+      1360: { slidesPerView: 1, spaceBetween: 24, centeredSlides: false }
+    }
+  });
+
+  document.querySelector('.landscape-prev').addEventListener('click', function(){ landscape.slidePrev(); });
+  document.querySelector('.landscape-next').addEventListener('click', function(){ landscape.slideNext(); });
+})();

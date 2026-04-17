@@ -24,6 +24,8 @@ const workspaceName = fs.existsSync('.temha_session.json')
 
 const workspaceDir = path.join(__dirname, `${workspaceName}`);
 const staticDir = path.join(__dirname, 'static');
+const rootIndexPath = path.join(__dirname, 'index.html');
+const standaloneMode = !fs.existsSync(workspaceDir) && fs.existsSync(staticDir) && fs.existsSync(rootIndexPath);
 
 const PROJECT_META_FILE = 'project.json';
 const PAGE_META_FILE = 'page.json';
@@ -73,6 +75,12 @@ function replaceResourcePaths(str) {
 }
 
 function buildPreview(done) {
+  if (standaloneMode) {
+    console.log('[GULP] workspace 폴더가 없어 기존 static 자산을 그대로 사용합니다.');
+    done();
+    return;
+  }
+
   console.log('[GULP][workspaceDir]', workspaceDir);
   if (!fs.existsSync(staticDir)) fs.mkdirSync(staticDir, { recursive: true });
 
@@ -421,6 +429,10 @@ function copyCommonResources(staticProjectDir) {
 const bs = browserSync.create();
 
 function clean() {
+  if (standaloneMode) {
+    console.log('[GULP] 독립 프로젝트 모드에서는 static 폴더를 정리하지 않습니다.');
+    return Promise.resolve();
+  }
   return del([`${staticDir}/**`, `!${staticDir}`]);
 }
 async function cleanWorkspace() {
@@ -482,6 +494,31 @@ async function cleanWorkspace() {
   }
 }
 function serve() {
+  if (standaloneMode) {
+    browserSync.init({
+      server: {
+        baseDir: __dirname,
+      },
+      startPath: 'index.html',
+      port: 3000,
+      open: true,
+      notify: false,
+    });
+
+    const standaloneWatchTargets = [
+      path.join(__dirname, 'index.html'),
+      path.join(staticDir, '**/*'),
+      path.join(__dirname, 'new-assets', '**/*'),
+    ];
+
+    watch(standaloneWatchTargets, { ignoreInitial: true }, (done) => {
+      console.log('[GULP] 독립 프로젝트 변경 사항을 감지해 미리보기를 새로고침합니다.');
+      browserSync.reload();
+      done();
+    });
+    return;
+  }
+
   browserSync.init({
     server: {
       baseDir: staticDir,
@@ -929,4 +966,4 @@ export { clean, cleanWorkspace };
 
 export const temha = series(build, serve);
 export const workspace = cleanWorkspace;
-export default build; 
+export default standaloneMode ? serve : build; 
