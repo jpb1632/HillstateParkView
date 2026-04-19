@@ -83,6 +83,7 @@
         $block.find(".header-gnbitem").each(function() {
           const $this = $(this);
           const $thisLink = $this.find(".header-gnblink");
+          if ($thisLink.hasClass("header-reserve-link")) return;
           $thisLink.off("click");
         });
         isDesktopMenuInitialized = true;
@@ -143,24 +144,170 @@
       }
 
       function getConsultationTarget() {
-        return document.querySelector(".properties-N9 .consultation-anchor");
+        return (
+          document.getElementById("consultation") ||
+          document.querySelector(".properties-N9 .consultation-anchor") ||
+          document.getElementById("consultation-title") ||
+          document.querySelector(".properties-N9 .title-area")
+        );
+      }
+
+      function buildConsultationUrl() {
+        return "#consultation";
+      }
+
+      function getConsultationPreloadImages() {
+        return Array.prototype.slice.call(
+          document.querySelectorAll(
+            ".properties-N5 img, .properties-N6 img, .properties-N7 img, .properties-N8 img, .properties-N10 img, .properties-N9 img"
+          )
+        );
+      }
+
+      function waitForConsultationAssets() {
+        const images = getConsultationPreloadImages().filter(function(img) {
+          if (!img) return false;
+          img.loading = "eager";
+          img.decoding = "sync";
+          return !img.complete || !img.naturalWidth;
+        });
+
+        if (!images.length) {
+          return Promise.resolve();
+        }
+
+        return new Promise(function(resolve) {
+          var resolved = false;
+          var remaining = images.length;
+          var preloaders = [];
+
+          function finish() {
+            if (resolved) return;
+            resolved = true;
+            resolve();
+          }
+
+          function markDone() {
+            remaining -= 1;
+            if (remaining <= 0) {
+              finish();
+            }
+          }
+
+          var timeoutId = window.setTimeout(finish, 2400);
+
+          images.forEach(function(img) {
+            var source = img.currentSrc || img.src;
+            if (source) {
+              var preloader = new Image();
+              preloaders.push(preloader);
+              preloader.decoding = "sync";
+              preloader.src = source;
+            }
+
+            function handleLoad() {
+              img.removeEventListener("load", handleLoad);
+              img.removeEventListener("error", handleLoad);
+              markDone();
+              if (remaining <= 0) {
+                window.clearTimeout(timeoutId);
+              }
+            }
+
+            img.addEventListener("load", handleLoad, { once: true });
+            img.addEventListener("error", handleLoad, { once: true });
+          });
+        });
+      }
+
+      function waitForConsultationFonts() {
+        if (!document.fonts || !document.fonts.ready) {
+          return Promise.resolve();
+        }
+
+        return document.fonts.ready.catch(function() {
+          return;
+        });
+      }
+
+      function waitForConsultationLayoutStable() {
+        return new Promise(function(resolve) {
+          const startedAt = Date.now();
+          let previousTop = null;
+          let stableCount = 0;
+
+          function sample() {
+            const target = getConsultationTarget();
+            if (!target) {
+              resolve();
+              return;
+            }
+
+            const currentTop = Math.round(target.getBoundingClientRect().top + window.scrollY);
+
+            if (previousTop !== null && Math.abs(currentTop - previousTop) <= 1) {
+              stableCount += 1;
+            } else {
+              stableCount = 0;
+            }
+
+            previousTop = currentTop;
+
+            if (stableCount >= 3 || Date.now() - startedAt >= 2200) {
+              resolve();
+              return;
+            }
+
+            window.setTimeout(function() {
+              window.requestAnimationFrame(sample);
+            }, 90);
+          }
+
+          window.requestAnimationFrame(sample);
+        });
       }
 
       function scrollToConsultation(behavior) {
         const target = getConsultationTarget();
         if (!target) return false;
 
-        const headerHeight = $block.outerHeight() || 96;
-        const targetRect = target.getBoundingClientRect();
-        const extraOffset = window.innerWidth <= 992 ? 10 : 18;
-        const targetTop = targetRect.top + window.scrollY - headerHeight - extraOffset;
+        const absoluteTop = target.getBoundingClientRect().top + window.scrollY;
+        const isConsultationAnchor =
+          target.id === "consultation" ||
+          target.classList.contains("consultation-anchor");
+        const header =
+          document.querySelector(".properties-N1 .header-container") ||
+          document.querySelector(".properties-N1");
+        const headerHeight = header ? header.getBoundingClientRect().height : 96;
+        const extraOffset = window.innerWidth <= 992 ? 8 : 16;
+        const targetTop = isConsultationAnchor
+          ? absoluteTop
+          : absoluteTop - headerHeight - extraOffset;
 
         window.scrollTo({
-          top: Math.max(0, targetTop),
+          top: Math.max(0, Math.round(targetTop)),
           behavior: behavior || "smooth"
         });
 
         return true;
+      }
+
+      function runConsultationScroll() {
+        if (!getConsultationTarget()) {
+          window.location.href = buildConsultationUrl();
+          return;
+        }
+
+        Promise.resolve()
+          .then(waitForConsultationAssets)
+          .then(waitForConsultationFonts)
+          .then(waitForConsultationLayoutStable)
+          .then(function() {
+            window.requestAnimationFrame(function() {
+              scrollToConsultation("smooth");
+              window.setTimeout(clearConsultationLocation, 900);
+            });
+          });
       }
 
       function clearConsultationLocation() {
@@ -168,7 +315,11 @@
         params.delete("consultation");
 
         const nextSearch = params.toString();
-        const nextHash = window.location.hash === "#consultation" ? "" : window.location.hash;
+        const nextHash =
+          window.location.hash === "#consultation" ||
+          window.location.hash === "#consultation-title"
+            ? ""
+            : window.location.hash;
         const nextUrl = `${window.location.pathname}${nextSearch ? `?${nextSearch}` : ""}${nextHash}`;
 
         history.replaceState(null, "", nextUrl);
@@ -176,25 +327,13 @@
 
       function handleInitialConsultationRequest() {
         const params = new URLSearchParams(window.location.search);
-        const shouldScroll = params.get("consultation") === "1" || window.location.hash === "#consultation";
+        const shouldScroll =
+          params.get("consultation") === "1" ||
+          window.location.hash === "#consultation" ||
+          window.location.hash === "#consultation-title";
         if (!shouldScroll) return;
 
-        let attempts = 0;
-
-        const run = function() {
-          attempts += 1;
-
-          if (scrollToConsultation(attempts === 1 ? "auto" : "smooth")) {
-            clearConsultationLocation();
-            return;
-          }
-
-          if (attempts < 6) {
-            window.setTimeout(run, 180);
-          }
-        };
-
-        window.setTimeout(run, 180);
+        runConsultationScroll();
       }
 
       function bindConsultationShortcut() {
@@ -203,16 +342,20 @@
 
         $consultationLinks.off("click.consultationShortcut").on("click.consultationShortcut", function(event) {
           event.preventDefault();
-          if (!scrollToConsultation("smooth")) return;
-
           $block.removeClass("block-active");
           $block.find(".header-fullmenu").removeClass("fullmenu-active");
-          clearConsultationLocation();
+          runConsultationScroll();
         });
       }
 
+      window.addEventListener("message", function(event) {
+        if (!event || !event.data || event.data.type !== "consultation-scroll") return;
+        runConsultationScroll();
+      });
+
       handleFullMenu();
       bindConsultationShortcut();
+      waitForConsultationAssets();
       handleInitialConsultationRequest();
       // 리사이즈 시마다 메뉴 동작 초기화
       $(window).on("resize", function() {

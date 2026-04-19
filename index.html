@@ -76,28 +76,11 @@
         } catch (_) {}
       };
 
-      const scrollFrameToConsultation = () => {
-        const applyScroll = () => {
-          try {
-            const frameWindow = frame.contentWindow;
-            const frameDocument = frameWindow && frameWindow.document;
-            const target = frameDocument && frameDocument.querySelector('.properties-N9 .consultation-anchor');
-            if (!target) return;
-
-            const rect = target.getBoundingClientRect();
-            const absoluteTop = rect.top + frameWindow.scrollY;
-            const offset = frameWindow.innerWidth <= 992 ? 110 : 150;
-
-            frameWindow.scrollTo({
-              top: Math.max(0, absoluteTop - offset),
-              behavior: "auto"
-            });
-          } catch (_) {}
-        };
-
-        [40, 180, 420, 900, 1600].forEach((delay) => {
-          window.setTimeout(applyScroll, delay);
-        });
+      const requestFrameConsultationScroll = () => {
+        try {
+          if (!frame.contentWindow) return;
+          frame.contentWindow.postMessage({ type: "consultation-scroll" }, "*");
+        } catch (_) {}
       };
 
       const syncFrameRoute = () => {
@@ -107,14 +90,14 @@
         if (frame.getAttribute("src") !== nextSrc) {
           frame.setAttribute("src", nextSrc);
         } else if (consultation) {
-          scrollFrameToConsultation();
+          requestFrameConsultationScroll();
           window.setTimeout(clearConsultationState, 800);
         }
       };
 
       frame.addEventListener("load", () => {
         if (!isConsultationRequest()) return;
-        scrollFrameToConsultation();
+        requestFrameConsultationScroll();
         window.setTimeout(clearConsultationState, 800);
       });
 

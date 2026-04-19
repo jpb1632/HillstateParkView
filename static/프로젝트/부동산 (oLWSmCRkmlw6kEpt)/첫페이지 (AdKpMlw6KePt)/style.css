@@ -2757,6 +2757,7 @@ to {
 }
 .properties-N7 .landscape-card {
   box-sizing: border-box;
+  aspect-ratio: 3840 / 2561;
   height: 100%;
   overflow: hidden;
   padding: 0;
@@ -2769,7 +2770,8 @@ to {
 .properties-N7 .landscape-card img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   border-radius: inherit;
   background: transparent;
   box-shadow:
@@ -2939,10 +2941,17 @@ to {
     0 0.4rem 1rem rgba(19, 40, 74, 0.045);
   transition: transform 0.38s ease, box-shadow 0.38s ease;
 }
+.properties-N8 .n8-banner-card-noise {
+  aspect-ratio: 2400 / 1720;
+}
+.properties-N8 .n8-banner-card-myhills {
+  aspect-ratio: 2400 / 2535;
+}
 .properties-N8 .n8-banner-card img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 .properties-N8 .n8-banner-card-myhills {
   display: flex;
@@ -2975,6 +2984,14 @@ to {
   }
   .properties-N8 .n8-banner-card {
     border-radius: 1.2rem;
+  }
+  .properties-N8 .n8-banner-card-noise,
+  .properties-N8 .n8-banner-card-myhills {
+    aspect-ratio: auto;
+  }
+  .properties-N8 .n8-banner-card img {
+    height: auto;
+    object-fit: initial;
   }
   .properties-N8 .n8-banner-card-myhills .n8-mobile-extra {
     display: block;
