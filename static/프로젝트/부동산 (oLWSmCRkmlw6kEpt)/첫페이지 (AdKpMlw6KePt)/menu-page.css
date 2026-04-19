@@ -646,7 +646,7 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
   .menu-page-view .properties-N1:hover .header-title .brand-mark,
   .menu-page-view .properties-N1.header-top-active .header-title .brand-mark,
   .menu-page-view .properties-N1.header-top-active:hover .header-title .brand-mark {
-    background-image: url("../resources/images/patio/menu_logo_white_v2.png") !important;
+    background-image: url("../../../../new-assets/logo_off_h3.png") !important;
   }
 
   .menu-page-view .properties-N1,
@@ -754,7 +754,7 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
   .menu-page-view .properties-N1:hover .header-title .brand-mark,
   .menu-page-view .properties-N1.header-top-active .header-title .brand-mark,
   .menu-page-view .properties-N1.header-top-active:hover .header-title .brand-mark {
-    background-image: url("../resources/images/patio/menu_logo_white_v2.png") !important;
+    background-image: url("../../../../new-assets/logo_off_h3.png") !important;
   }
 
   body.menu-page-view {

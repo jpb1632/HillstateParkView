@@ -903,7 +903,16 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
 }
 .properties-N4 .hero-slide img {
   object-fit: cover;
-  object-position: center
+  object-position: center;
+  transform: scale(1.06);
+  transform-origin: center center;
+  will-change: transform
+}
+.properties-N4 .hero-slide.is-active img {
+  animation: n4-hero-kenburns 7.2s ease-in-out infinite alternate
+}
+.properties-N4 .hero-slide:not(.is-active) img {
+  animation: none
 }
 .properties-N4 .hero-controls {
   position: absolute;
@@ -1422,11 +1431,23 @@ to {
     transform: translateY(0)
  }
 }
+@keyframes n4-hero-kenburns {
+from {
+    transform: scale(1.05) translate3d(0, 0, 0)
+ }
+to {
+    transform: scale(1.12) translate3d(-1.2%, 0.9%, 0)
+ }
+}
 @media (prefers-reduced-motion: reduce) {
 .properties-N4 .hero-copy-kicker,
   .properties-N4 .hero-copy-title,
   .properties-N4 .hero-copy-subtitle {
     opacity: 1;
+    animation: none !important;
+    transform: none !important
+ }
+.properties-N4 .hero-slide img {
     animation: none !important;
     transform: none !important
  }
@@ -1439,9 +1460,11 @@ to {
 .properties-N4 .contents-container:not(.fullscreen) {
     min-height: calc(100vw * 2520 / 1620)
  }
-.properties-N4 .hero-slide,
-  .properties-N4 .hero-slide.is-active {
-    transform: none
+.properties-N4 .hero-slide {
+    transform: scale(1.06)
+ }
+.properties-N4 .hero-slide.is-active {
+    transform: scale(1)
  }
 .properties-N4 .hero-slide img {
     object-fit: cover;
@@ -2592,13 +2615,19 @@ to {
 .properties-N7 .n7-mobile-premium-block img + img {
   margin-top: 2.2rem
 }
-.properties-N7.reveal-ready .n7-image-item {
+.properties-N7.reveal-ready .n7-image-item,
+.properties-N7.reveal-ready .landscape-head,
+.properties-N7.reveal-ready .landscape-slider-wrap,
+.properties-N7.reveal-ready .landscape-pagination {
   opacity: 0;
   transform: translateY(44px);
   transition: opacity 1.3s ease, transform 1.3s ease;
   will-change: opacity, transform
 }
-.properties-N7.reveal-ready .n7-image-item.in-view {
+.properties-N7.reveal-ready .n7-image-item.in-view,
+.properties-N7.reveal-ready .landscape-head.in-view,
+.properties-N7.reveal-ready .landscape-slider-wrap.in-view,
+.properties-N7.reveal-ready .landscape-pagination.in-view {
   opacity: 1;
   transform: translateY(0)
 }
@@ -2879,6 +2908,16 @@ to {
     linear-gradient(180deg, rgba(255, 255, 255, 0.56) 0%, rgba(255, 255, 255, 0) 18%),
     linear-gradient(180deg, #f8f3ea 0%, #fbf9f5 100%);
 }
+.properties-N8.reveal-ready .n8-banner-card {
+  opacity: 0;
+  transform: translateY(44px);
+  transition: opacity 1.15s ease, transform 1.15s ease;
+  will-change: opacity, transform;
+}
+.properties-N8.reveal-ready .n8-banner-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
 .properties-N8 .contents-inner {
   width: 100%;
 }
@@ -2915,6 +2954,9 @@ to {
 .properties-N8 .n8-banner-card-myhills .n8-mobile-extra {
   display: none;
 }
+.properties-N8 .n8-banner-card-hservice {
+  display: none;
+}
 @media (hover: hover) and (pointer: fine) {
   .properties-N8 .n8-banner-card:hover {
     transform: translateY(-0.7rem);
@@ -2946,6 +2988,9 @@ to {
     width: 100%;
     aspect-ratio: 720 / 1747;
     background: url("../../../../new-assets/mobile/M_inter-floor_noise_h1.jpg") no-repeat center/100% 100%;
+  }
+  .properties-N8 .n8-banner-card-hservice {
+    display: block;
   }
 }
 /* properties-N10 */
@@ -2981,6 +3026,16 @@ to {
     height: auto;
   }
 }
+.properties-N10.reveal-ready .n10-type-card {
+  opacity: 0;
+  transform: translateY(44px);
+  transition: opacity 1.15s ease, transform 1.15s ease;
+  will-change: opacity, transform;
+}
+.properties-N10.reveal-ready .n10-type-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
 /* properties-N9 */
 /* Icon-font fallback fix */
 .properties-N9 {
@@ -2990,6 +3045,20 @@ to {
   padding-bottom: 4rem;
   background: #fff;
   scroll-margin-top: 12rem
+}
+.properties-N9.reveal-ready .title-area,
+.properties-N9.reveal-ready .form-group,
+.properties-N9.reveal-ready .n9-bottom-banner {
+  opacity: 0;
+  transform: translateY(44px);
+  transition: opacity 1.15s ease, transform 1.15s ease;
+  will-change: opacity, transform;
+}
+.properties-N9.reveal-ready .title-area.in-view,
+.properties-N9.reveal-ready .form-group.in-view,
+.properties-N9.reveal-ready .n9-bottom-banner.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 .properties-N9 .checkset.checkset-fill .checkset-input:checked+.checkset-label::after {
   content: "";
