@@ -1578,7 +1578,7 @@ to {
       inset 0 1px 0 rgba(255, 255, 255, 0.82)
  }
 .properties-N4 .popup-overlay, .popup-overlay-hoisted {
-    padding: 1.6rem 0.8rem
+    padding: 1.2rem 0.35rem
  }
 .properties-N4 .popup-stage, .popup-overlay-hoisted .popup-stage {
     width: 98vw;
@@ -1586,7 +1586,7 @@ to {
     transform: translateY(-2rem)
  }
 .properties-N4 .popup-area, .popup-overlay-hoisted .popup-area {
-    width: min(32.5rem, 80.4vw);
+    width: min(48rem, 96vw);
     position: relative;
     overflow: hidden;
     padding-bottom: 0;
@@ -1659,7 +1659,7 @@ to {
  }
 .properties-N4 .popup-actions, .popup-overlay-hoisted .popup-actions {
     margin-top: 0;
-    width: min(32.5rem, 80.4vw);
+    width: min(48rem, 96vw);
     gap: 0;
     font-size: 1.6rem;
     padding: 0;
