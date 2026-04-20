@@ -457,8 +457,11 @@
       function(event) {
         const key = String(event.key || "").toLowerCase();
         const ctrlOrMeta = event.ctrlKey || event.metaKey;
+        const blockedDevToolShortcut =
+          event.key === "F12" ||
+          (ctrlOrMeta && event.shiftKey && ["i", "j", "c"].includes(key));
 
-        if (ctrlOrMeta && (key === "u" || key === "s")) {
+        if (blockedDevToolShortcut || (ctrlOrMeta && (key === "u" || key === "s"))) {
           event.preventDefault();
         }
       },
