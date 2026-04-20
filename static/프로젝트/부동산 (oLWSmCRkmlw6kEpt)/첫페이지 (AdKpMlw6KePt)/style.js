@@ -7,19 +7,43 @@
       const BASE_HEADER_TOP = -4;
       const DESKTOP_SECTION_SHIFT = -26;
       const MOBILE_SECTION_SHIFT = -26;
-      const COMPLEX_REMOVE_TABS = ["design", "system"];
+      const COMPLEX_MAIN_HREF = "./menu-page.html?group=complex&tab=siteplan";
+      const COMPLEX_MENU_ITEMS = [
+        { tab: "siteplan", label: "단지배치도" },
+        { tab: "unitplan", label: "동호수배치도" },
+        { tab: "community", label: "커뮤니티" },
+        { tab: "myhills", label: "마이힐스" },
+        { tab: "hsystem", label: "H-시스템" },
+      ];
 
-      function pruneComplexSubMenus() {
-        COMPLEX_REMOVE_TABS.forEach(function(tabKey) {
-          const href = `./menu-page.html?group=complex&tab=${tabKey}`;
-          $block
-            .find(`.header-subitem > .header-sublink[href="${href}"]`)
-            .closest(".header-subitem")
-            .remove();
-          $block
-            .find(`.fullmenu-subitem > .fullmenu-sublink[href="${href}"]`)
-            .closest(".fullmenu-subitem")
-            .remove();
+      function buildComplexSubMenuHtml(itemClass, linkClass) {
+        return COMPLEX_MENU_ITEMS.map(function(item) {
+          const href = `./menu-page.html?group=complex&tab=${item.tab}`;
+          return `<li class="${itemClass}"><a class="${linkClass}" href="${href}"><span>${item.label}</span></a></li>`;
+        }).join("");
+      }
+
+      function normalizeComplexSubMenus() {
+        $block
+          .find('.header-gnblink[href*="group=complex"], .fullmenu-gnblink[href*="group=complex"]')
+          .attr("href", COMPLEX_MAIN_HREF);
+
+        $block.find(".header-gnbitem").each(function() {
+          const $item = $(this);
+          const href = $item.find("> .header-gnblink").attr("href") || "";
+          if (!href.includes("group=complex")) return;
+          $item
+            .find("> .header-sublist")
+            .html(buildComplexSubMenuHtml("header-subitem", "p2 header-sublink"));
+        });
+
+        $block.find(".fullmenu-gnbitem").each(function() {
+          const $item = $(this);
+          const href = $item.find("> .fullmenu-gnblink").attr("href") || "";
+          if (!href.includes("group=complex")) return;
+          $item
+            .find("> .fullmenu-sublist")
+            .html(buildComplexSubMenuHtml("fullmenu-subitem", "p1 fullmenu-sublink"));
         });
       }
 
@@ -118,7 +142,7 @@
       }
       handleScroll();
       forceTopGapFix();
-      pruneComplexSubMenus();
+      normalizeComplexSubMenus();
       $(window).on("load resize orientationchange", forceTopGapFix);
       // 전체 메뉴 열기/닫기 처리
       function handleFullMenu() {
