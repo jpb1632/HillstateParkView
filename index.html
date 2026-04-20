@@ -67,6 +67,22 @@
   ></iframe>
   <script>
     (function () {
+      const blockGuardShortcut = (event) => {
+        const key = String(event.key || "").toLowerCase();
+        const ctrlOrMeta = event.ctrlKey || event.metaKey;
+        const blockedDevToolShortcut =
+          event.key === "F12" ||
+          (ctrlOrMeta && event.shiftKey && ["i", "j", "c"].includes(key));
+
+        if (blockedDevToolShortcut || (ctrlOrMeta && (key === "u" || key === "s"))) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      };
+
+      window.addEventListener("keydown", blockGuardShortcut, { capture: true });
+      document.addEventListener("keydown", blockGuardShortcut, { capture: true });
+
       const baseSrc = "./static/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%B6%80%EB%8F%99%EC%82%B0%20(oLWSmCRkmlw6kEpt)/%EC%B2%AB%ED%8E%98%EC%9D%B4%EC%A7%80%20(AdKpMlw6KePt)/%EC%B2%AB%ED%8E%98%EC%9D%B4%EC%A7%80%20(AdKpMlw6KePt).html";
       const frame = document.getElementById("app-frame");
       if (!frame) return;
