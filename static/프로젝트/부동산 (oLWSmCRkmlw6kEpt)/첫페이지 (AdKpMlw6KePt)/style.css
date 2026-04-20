@@ -1773,6 +1773,151 @@ to {
   width: 100%;
   margin: 0;
 }
+.properties-N5 .n5-special-banner {
+  isolation: isolate;
+  background: #271a06;
+  box-shadow:
+    0 1.35rem 3.2rem rgba(93, 63, 13, 0.16),
+    0 0 0 1px rgba(226, 181, 85, 0.18);
+}
+.properties-N5 .n5-special-banner img {
+  position: relative;
+  z-index: 1;
+  transform: scale(1.012);
+  transform-origin: center;
+  animation: n5SpecialImageDrift 7.2s ease-in-out infinite;
+  will-change: transform;
+}
+.properties-N5 .n5-special-motion,
+.properties-N5 .n5-special-streak {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.properties-N5 .n5-special-motion {
+  z-index: 2;
+  inset: -10% -24%;
+  width: auto;
+  background:
+    linear-gradient(104deg,
+      rgba(255, 236, 170, 0) 0%,
+      rgba(90, 56, 7, 0) 18%,
+      rgba(131, 88, 20, 0.34) 34%,
+      rgba(229, 183, 83, 0.66) 48%,
+      rgba(255, 240, 176, 0.74) 54%,
+      rgba(174, 113, 23, 0.3) 68%,
+      rgba(255, 236, 170, 0) 86%,
+      rgba(255, 236, 170, 0) 100%);
+  clip-path: polygon(18% 0, 100% 0, 82% 100%, 0 100%);
+  filter: blur(0.18rem);
+  mix-blend-mode: screen;
+  animation: n5SpecialGoldRibbon 4.8s cubic-bezier(0.55, 0, 0.18, 1) infinite;
+  will-change: transform, opacity;
+}
+.properties-N5 .n5-special-streak {
+  z-index: 3;
+  inset: -18% -24%;
+  background:
+    linear-gradient(112deg,
+      rgba(255, 255, 255, 0) 37%,
+      rgba(255, 227, 143, 0.28) 46%,
+      rgba(255, 255, 255, 0.46) 49%,
+      rgba(189, 124, 24, 0.22) 54%,
+      rgba(255, 255, 255, 0) 64%);
+  opacity: 0.62;
+  transform: translateX(-82%);
+  animation: n5SpecialLightSweep 4.8s cubic-bezier(0.55, 0, 0.18, 1) infinite;
+  will-change: transform, opacity;
+}
+@keyframes n5SpecialGoldRibbon {
+  0% {
+    opacity: 0;
+    transform: translateX(-92%) skewX(-8deg);
+  }
+  12% {
+    opacity: 0.82;
+  }
+  72% {
+    opacity: 0.72;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(92%) skewX(-8deg);
+  }
+}
+@keyframes n5SpecialLightSweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-92%);
+  }
+  45% {
+    opacity: 0.62;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(92%);
+  }
+}
+@keyframes n5SpecialImageDrift {
+  0%, 100% {
+    transform: scale(1.012) translateX(0);
+  }
+  48% {
+    transform: scale(1.026) translateX(-0.55%);
+  }
+}
+.properties-N5 .n5-giveaway-banner {
+  isolation: isolate;
+}
+.properties-N5 .n5-giveaway-banner img {
+  position: relative;
+  z-index: 1;
+  transform-origin: center;
+  animation: n5GiveawayBreath 7.4s ease-in-out infinite;
+  will-change: transform;
+}
+.properties-N5 .n5-giveaway-glass {
+  position: absolute;
+  inset: -20% -34%;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    linear-gradient(112deg,
+      rgba(255, 255, 255, 0) 34%,
+      rgba(255, 255, 255, 0.1) 43%,
+      rgba(255, 255, 255, 0.38) 48%,
+      rgba(255, 247, 210, 0.18) 52%,
+      rgba(255, 255, 255, 0) 63%);
+  opacity: 0;
+  transform: translateX(-88%);
+  animation: n5GiveawayGlassSweep 5.6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+@keyframes n5GiveawayBreath {
+  0%, 100% {
+    transform: scale(1);
+  }
+  48% {
+    transform: scale(1.018);
+  }
+}
+@keyframes n5GiveawayGlassSweep {
+  0%, 34% {
+    opacity: 0;
+    transform: translateX(-88%);
+  }
+  50% {
+    opacity: 0.72;
+  }
+  70% {
+    opacity: 0;
+    transform: translateX(88%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(88%);
+  }
+}
 .properties-N5 .n5-lead-item {
   overflow: hidden;
   border-radius: 1.8rem;
@@ -2131,6 +2276,22 @@ to {
     transform: none;
     transition: none
   }
+  .properties-N5 .n5-special-banner img,
+  .properties-N5 .n5-giveaway-banner img,
+  .properties-N5 .n5-special-motion,
+  .properties-N5 .n5-special-streak,
+  .properties-N5 .n5-giveaway-glass,
+  .properties-N6 .n6-promotion-banner img,
+  .properties-N6 .n6-promotion-glow {
+    animation: none;
+    transform: none
+  }
+  .properties-N5 .n5-special-motion,
+  .properties-N5 .n5-special-streak,
+  .properties-N5 .n5-giveaway-glass,
+  .properties-N6 .n6-promotion-glow {
+    display: none
+  }
 }
 /* properties-N6 */
 /* Scroll reveal for N6 images */
@@ -2184,6 +2345,69 @@ to {
   width: 100%;
   max-width: none;
   margin: 0;
+}
+.properties-N6 .n6-promotion-banner {
+  isolation: isolate;
+  background: linear-gradient(135deg, #fff8df 0%, #ffffff 42%, #fff0b6 100%);
+  box-shadow:
+    0 1.3rem 3rem rgba(255, 167, 45, 0.14),
+    0 0 0 1px rgba(255, 196, 72, 0.2);
+}
+.properties-N6 .n6-promotion-banner img {
+  position: relative;
+  z-index: 1;
+  transform-origin: center;
+  animation: n6PromotionFloat 7.6s ease-in-out infinite;
+  will-change: transform, filter;
+}
+.properties-N6 .n6-promotion-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.properties-N6 .n6-promotion-glow {
+  z-index: 2;
+  inset: -24% -18%;
+  background:
+    radial-gradient(circle at 18% 24%, rgba(255, 229, 106, 0.42) 0 8%, transparent 19%),
+    radial-gradient(circle at 82% 16%, rgba(255, 86, 66, 0.2) 0 7%, transparent 18%),
+    linear-gradient(112deg,
+      rgba(255, 255, 255, 0) 36%,
+      rgba(255, 255, 255, 0.18) 45%,
+      rgba(255, 247, 198, 0.48) 50%,
+      rgba(255, 255, 255, 0.16) 55%,
+      rgba(255, 255, 255, 0) 65%);
+  opacity: 0.58;
+  transform: translateX(-58%);
+  animation: n6PromotionGlowSweep 6.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+@keyframes n6PromotionFloat {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+    filter: saturate(1);
+  }
+  48% {
+    transform: scale(1.012) translateY(-0.35%);
+    filter: saturate(1.04);
+  }
+}
+@keyframes n6PromotionGlowSweep {
+  0%, 28% {
+    opacity: 0.22;
+    transform: translateX(-62%);
+  }
+  52% {
+    opacity: 0.7;
+  }
+  74% {
+    opacity: 0.2;
+    transform: translateX(54%);
+  }
+  100% {
+    opacity: 0.22;
+    transform: translateX(54%);
+  }
 }
 .properties-N6 .n6-location-card {
   width: 88%;
