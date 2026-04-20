@@ -289,6 +289,10 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
   gap: 0.8rem;
 }
 
+.menupage-variant-row-flat {
+  gap: 1rem;
+}
+
 .menupage-variant-tab {
   display: inline-flex;
   align-items: center;
@@ -323,6 +327,14 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
   padding: 0 1.4rem;
   font-size: 1.55rem;
   font-weight: 600;
+}
+
+.menupage-variant-row-flat .menupage-variant-tab-secondary {
+  min-width: 9.2rem;
+  min-height: 4rem;
+  padding: 0 1.8rem;
+  font-size: 1.75rem;
+  font-weight: 700;
 }
 
 .menupage-variant-tab:hover {

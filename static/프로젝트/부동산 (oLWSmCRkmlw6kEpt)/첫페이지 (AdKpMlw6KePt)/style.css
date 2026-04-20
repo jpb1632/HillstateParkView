@@ -3768,7 +3768,7 @@ body {
 }
 .fixed-consult-bar.is-split .consult-form-wrap {
   position: relative;
-  background: #ff006f;
+  background: linear-gradient(135deg, #b5131b 0%, #8f080d 100%);
   clip-path: polygon(28px 0, 100% 0, 100% 100%, 0 100%);
   display: flex;
   align-items: flex-start;

@@ -99,8 +99,11 @@
       label: "단지안내",
       topIndex: 1,
       tabs: [
-        { key: "community", label: "커뮤니티" },
         { key: "siteplan", label: "단지배치도" },
+        { key: "unitplan", label: "동호수배치도" },
+        { key: "community", label: "커뮤니티" },
+        { key: "myhills", label: "마이힐스" },
+        { key: "hsystem", label: "H-시스템" },
       ],
     },
     type: {
@@ -108,7 +111,7 @@
       topIndex: 2,
       tabs: [
         { key: "type", label: "타입안내" },
-        { key: "interior", label: "타운하우스" },
+        { key: "interior", label: "인테리어" },
       ],
     },
     route: {
@@ -121,49 +124,33 @@
   const TYPE_VARIANTS = {
     type: {
       groups: [
-          {
-            key: "84c",
-            label: "84C",
-            items: [
-              { key: "84c1", label: "84C1", image: "../resources/images/patio/84C1.png" },
-              { key: "84c2", label: "84C2", image: "../resources/images/patio/84C2.png" },
-              { key: "84c3", label: "84C3", image: "../resources/images/patio/84C3.png" },
-              { key: "84c4", label: "84C4", image: "../resources/images/patio/84C4.png" },
-              { key: "84c5", label: "84C5", image: "../resources/images/patio/84C5.png" },
-              { key: "84c6", label: "84C6", image: "../resources/images/patio/84C6.png" },
-              { key: "84c7", label: "84C7", image: "../resources/images/patio/84C7.png" },
-              { key: "84c8", label: "84C8", image: "../resources/images/patio/84C8.png" },
-              { key: "84c9", label: "84C9", image: "../resources/images/patio/84C9.png" },
-              { key: "84c11", label: "84C11", image: "../resources/images/patio/84C11.png" },
-              { key: "84c12", label: "84C12", image: "../resources/images/patio/84C12.png" },
-              { key: "84c13", label: "84C13", image: "../resources/images/patio/84C13.png" },
-              { key: "84c14", label: "84C14", image: "../resources/images/patio/84C14.png" },
-            ],
-          },
-          {
-            key: "84i",
-            label: "84I",
-            items: [
-              { key: "84i1", label: "84I1", image: "../resources/images/patio/84I1.png" },
-              { key: "84i2", label: "84I2", image: "../resources/images/patio/84I2.png" },
-              { key: "84i3", label: "84I3", image: "../resources/images/patio/84I3.png" },
-              { key: "84i5", label: "84I5", image: "../resources/images/patio/84I5.png" },
-              { key: "84i6", label: "84I6", image: "../resources/images/patio/84I6.png" },
-              { key: "84i7", label: "84I7", image: "../resources/images/patio/84I7.png" },
-            ],
-          },
-          {
-            key: "84l",
-            label: "84L",
-            items: [
-              { key: "84l1", label: "84L1", image: "../resources/images/patio/84L1.png" },
-              { key: "84l2", label: "84L2", image: "../resources/images/patio/84L2.png" },
-            ],
-          },
+        {
+          key: "floorplan",
+          label: "타입",
+          hidePrimary: true,
+          items: [
+            { key: "59a", label: "59㎡A", image: "../../../../new-assets/menu/59A_1.jpg" },
+            { key: "59b", label: "59㎡B", image: "../../../../new-assets/menu/59B_1.jpg" },
+            { key: "59c", label: "59㎡C", image: "../../../../new-assets/menu/59C_1.jpg" },
+            { key: "84a", label: "84㎡A", image: "../../../../new-assets/menu/84A_1.jpg" },
+            { key: "84b", label: "84㎡B", image: "../../../../new-assets/menu/84B_1.jpg" },
+            { key: "84c", label: "84㎡C", image: "../../../../new-assets/menu/84C_1.jpg" },
+          ],
+        },
       ],
     },
     interior: {
-      groups: [],
+      groups: [
+        {
+          key: "interior",
+          label: "인테리어",
+          hidePrimary: true,
+          items: [
+            { key: "54i", label: "54㎡", image: "../../../../new-assets/menu/54I_h1.jpg" },
+            { key: "84i", label: "84㎡", image: "../../../../new-assets/menu/84I_h1.jpg" },
+          ],
+        },
+      ],
     },
   };
 
@@ -214,79 +201,75 @@
     business: {
       overview: {
         title: "힐스테이트 회룡역 파크뷰 사업개요",
-        subtitle: "양주에서 처음 만나는 힐스테이트",
-        copy: "집이 라이프를 바꾸는 순간",
+        subtitle: "의정부 1,816세대 1군 브랜드 아파트",
+        copy: "힐스테이트 회룡역 파크뷰",
         copySub: "",
         image: "",
         canvasLayout: [
-          { type: "image", src: "../resources/images/patio/Business1.png" },
-          { type: "gap", size: "lg" },
-          { type: "image", src: "../resources/images/patio/Business2.png" },
+          {
+            type: "stack",
+            images: [
+              "../../../../new-assets/menu/meun_a1.jpg",
+              "../../../../new-assets/menu/meun_a2.jpg",
+            ],
+          },
         ],
         specs: [],
         notes: [],
       },
       location: {
         title: "힐스테이트 회룡역 파크뷰 입지환경",
-        subtitle: "양주 옥정신도시의 중심에서",
-        copy: "도시와 숲을 동시에 마주하는 라이프",
+        subtitle: "서울까지 2정거장! 더블역세권",
+        copy: "강남까지 약 20분대 도착!",
         copySub: "",
         image: "",
         canvasLayout: [
-          { type: "image", src: "../resources/images/patio/Locat1.png" },
-          { type: "image", src: "../resources/images/patio/Locat1_subtext.png" },
+          {
+            type: "stack",
+            images: [
+              "../../../../new-assets/menu/Location environment_1_h1.jpg",
+              "../../../../new-assets/menu/Location environment_3_h1.jpg",
+              "../../../../new-assets/menu/Location environment_4_h1.png",
+            ],
+          },
         ],
         specs: [],
         notes: [],
       },
       brand: {
         title: "힐스테이트 회룡역 파크뷰 브랜드소개",
-        subtitle: "코르도바라이프의 시작",
-        copy: "힐스테이트 파티오포레!",
+        subtitle: "한 차원 더 높은 생활의 가치와",
+        copy: "남다른 삶을 제공하는 힐스테이트",
         copySub: "",
         image: "",
         canvasLayout: [
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/brand_text1.png" },
-          { type: "gap", size: "sm" },
-          { type: "image", src: "../resources/images/patio/brand_text2.png" },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/brand_main1.png" },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/brand_main2.png" },
-          { type: "gap", size: "md" },
-          {
-            type: "row",
-            columns: 3,
-            images: [
-              "../resources/images/patio/brand_sub1.png",
-              "../resources/images/patio/brand_sub2.png",
-              "../resources/images/patio/brand_sub3.png",
-            ],
-          },
-          { type: "gap", size: "sm" },
-          { type: "image", src: "../resources/images/patio/brand_subtext.png" },
+          { type: "image", src: "../../../../new-assets/menu/brand_h1.png" },
         ],
         specs: [],
         notes: [],
       },
       premium: {
         title: "힐스테이트 회룡역 파크뷰 프리미엄",
-        subtitle: "아파트에서 못 다 이룬",
-        copy: "공간의 로망을 현실로!",
+        subtitle: "더블역세권, 숲세권, 학세권까지 모두 품은",
+        copy: "힐스테이트 회룡역 파크뷰!",
         copySub: "",
         image: "",
         canvasLayout: [
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/Premium_text.png" },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/Premium_main1.png" },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/Premium_main2.png" },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/Premium_main3.png" },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/Premium_main4.png" },
+          {
+            type: "row",
+            columns: 2,
+            className: "menupage-premium-grid",
+            images: [
+              "../../../../new-assets/menu/M_premium_h1%20(1).png",
+              "../../../../new-assets/menu/M_premium_h1%20(2).png",
+              "../../../../new-assets/menu/M_premium_h1%20(3).png",
+              "../../../../new-assets/menu/M_premium_h1%20(4).png",
+              "../../../../new-assets/menu/M_premium_h1%20(5).png",
+              "../../../../new-assets/menu/M_premium_h1%20(6).png",
+              "../../../../new-assets/menu/M_premium_h1%20(7).png",
+              "../../../../new-assets/menu/M_premium_h1%20(8).png",
+            ],
+          },
         ],
         specs: [],
         notes: [],
@@ -309,142 +292,61 @@
         image: "../resources/images/complex guide1.jpg",
       },
       community: {
-        subtitle: "일상을 다채롭게 채워주는",
-        copy: "수준 높은 33개의 커뮤니티",
+        subtitle: "삶이 풍요로운 수준높은 커뮤니티",
+        copy: "당신의 일상을 특별하게 합니다.",
         copySub: "",
         image: "",
         canvasLayout: [
-          { type: "image", src: "../resources/images/patio/Community1_text.png" },
-          { type: "gap", size: "md" },
-          {
-            type: "row",
-            columns: 2,
-            items: [
-              { type: "image", src: "../resources/images/patio/Community1_left.png" },
-              { type: "image", src: "../resources/images/patio/Community1_right.png", className: "is-offset-down" },
-            ],
-          },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/Community2.png" },
-          { type: "image", src: "../resources/images/patio/Community2_subtext.png" },
+          { type: "image", src: "../../../../new-assets/community_h1.jpg" },
         ],
       },
       siteplan: {
-        subtitle: "총 809세대 대단지 단독주택",
-        copy: "대단지 아파트 수준의 규모있는 커뮤니티",
+        subtitle: "바람길까지 설계한 여유로운 단지배치",
+        copy: "통경축 확보로 쾌적함과 여유를 한번에!",
         copySub: "",
         image: "",
         canvasLayout: [
-          { type: "image", src: "../resources/images/patio/arrangement_main.png" },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/arrangement_text_1.png" },
+          { type: "image", src: "../../../../new-assets/complex arrangement_h1.jpg" },
+        ],
+      },
+      unitplan: {
+        subtitle: "의정부 1,816세대 1군 브랜드 아파트",
+        copy: "힐스테이트 회룡역 파크뷰",
+        copySub: "",
+        image: "",
+        canvasLayout: [
+          { type: "image", src: "../../../../new-assets/menu/number arrangement_h1.jpg" },
+        ],
+      },
+      myhills: {
+        subtitle: "클릭 한번으로 누리는 힐스테이트",
+        copy: "사용자 편의를 생각한 생활 솔루션",
+        copySub: "",
+        image: "",
+        canvasLayout: [
           {
-            type: "row",
-            columns: 2,
-            items: [
-              { type: "image", src: "../resources/images/patio/arrangement_left_1.png" },
-              {
-                type: "stack",
-                images: [
-                  "../resources/images/patio/arrangement_right1_1.png",
-                  "../resources/images/patio/arrangement_right2_1.png",
-                ],
-              },
-            ],
-          },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/arrangement_text_2.png" },
-          {
-            type: "row",
-            columns: 2,
-            items: [
-              {
-                type: "stack",
-                images: [
-                  "../resources/images/patio/arrangement_left1_2.png",
-                  "../resources/images/patio/arrangement_left2_2.png",
-                ],
-              },
-              { type: "image", src: "../resources/images/patio/arrangement_right_2.png" },
-            ],
-          },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/arrangement_text_3.png" },
-          {
-            type: "row",
-            columns: 2,
-            items: [
-              { type: "image", src: "../resources/images/patio/arrangement_left_3.png" },
-              {
-                type: "stack",
-                images: [
-                  "../resources/images/patio/arrangement_right1_3.png",
-                  "../resources/images/patio/arrangement_right2_3.png",
-                ],
-              },
-            ],
-          },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/arrangement_text_4.png" },
-          {
-            type: "row",
-            columns: 2,
-            items: [
-              {
-                type: "stack",
-                images: [
-                  "../resources/images/patio/arrangement_left1_4.png",
-                  "../resources/images/patio/arrangement_left2_4.png",
-                ],
-              },
-              { type: "image", src: "../resources/images/patio/arrangement_right_4.png" },
-            ],
-          },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/arrangement_text_5.png" },
-          {
-            type: "row",
-            columns: 2,
-            items: [
-              { type: "image", src: "../resources/images/patio/arrangement_left_5.png" },
-              {
-                type: "stack",
-                images: [
-                  "../resources/images/patio/arrangement_right1_5.png",
-                  "../resources/images/patio/arrangement_right2_5.png",
-                ],
-              },
-            ],
-          },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/arrangement_text_6.png" },
-          {
-            type: "row",
-            columns: 2,
-            items: [
-              {
-                type: "stack",
-                images: [
-                  "../resources/images/patio/arrangement_left1_6.png",
-                  "../resources/images/patio/arrangement_left2_6.png",
-                ],
-              },
-              { type: "image", src: "../resources/images/patio/arrangement_right_6.png" },
+            type: "stack",
+            images: [
+              "../../../../new-assets/MyHills_h1.png",
+              "../../../../new-assets/menu/M_MyHills_2_h1.png",
             ],
           },
         ],
       },
-      unitplan: {
-        subtitle: "동호수배치도",
-        copy: "즐거움과 휴식을 선사하는 쾌적한 힐링 단지",
+      hsystem: {
+        subtitle: "트렌드를 리드하는 현대건설",
+        copy: "고객이 가장 살고 싶은 집을 설계합니다.",
         copySub: "",
-        image: "../resources/images/b3.jpg",
-      },
-      system: {
-        subtitle: "시스템",
-        copy: "스마트하고 안전한 시스템 최첨단 생활에 윤택함을 더하다!",
-        copySub: "",
-        image: "../resources/images/complex guide5.jpg",
+        image: "",
+        canvasLayout: [
+          {
+            type: "stack",
+            images: [
+              "../../../../new-assets/inter-floor_noise_h2.png",
+              "../../../../new-assets/mobile/Hservice_h1.jpg",
+            ],
+          },
+        ],
       },
       default: {
         title: "힐스테이트 회룡역 파크뷰",
@@ -459,8 +361,8 @@
     type: {
       type: {
         title: "힐스테이트 회룡역 파크뷰",
-        subtitle: "일상을 다채롭게 채워주는",
-        copy: "수준 높은 33개의 커뮤니티",
+        subtitle: "취향을 담은 혁신 평면에",
+        copy: "트렌디한 라이프 스타일을 더하다!",
         copySub: "",
         image: "",
         specs: [],
@@ -468,30 +370,10 @@
       },
       interior: {
         title: "힐스테이트 회룡역 파크뷰",
-        subtitle: "아파트에선 상상만 했던,",
-        copy: "로망을 현실로 만들어주는 타운하우스!",
+        subtitle: "풍요로움과 아름다움을 담은",
+        copy: "힐스테이트만의 고품격 인테리어",
         copySub: "",
         image: "",
-        canvasLayout: [
-          { type: "image", src: "../resources/images/patio/Rooftop_text_v2.png" },
-          { type: "image", src: "../resources/images/patio/Rooftop_main_v2.png" },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/Rooftop_sub1_text.png" },
-          { type: "image", src: "../resources/images/patio/Rooftop_sub1_main.png" },
-          { type: "image", src: "../resources/images/patio/Rooftop_sub1_subtext.png" },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/Rooftop_sub2_text.png" },
-          { type: "image", src: "../resources/images/patio/Rooftop_sub2_main.png" },
-          { type: "image", src: "../resources/images/patio/Rooftop_sub2_subtext.png" },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/Rooftop_sub3_text.png" },
-          { type: "image", src: "../resources/images/patio/Rooftop_sub3_main.png" },
-          { type: "image", src: "../resources/images/patio/Rooftop_sub3_subtext.png" },
-          { type: "gap", size: "md" },
-          { type: "image", src: "../resources/images/patio/Rooftop_sub4_text.png" },
-          { type: "image", src: "../resources/images/patio/Rooftop_sub4_main.png" },
-          { type: "image", src: "../resources/images/patio/Rooftop_sub4_subtext.png" },
-        ],
         specs: [],
         notes: [],
       },
@@ -734,6 +616,12 @@
       }
 
       if (item.type === "image" && item.src) {
+        const node = createLayoutNode(item, imageAlt);
+        if (node) wrap.appendChild(node);
+        return;
+      }
+
+      if (item.type === "stack") {
         const node = createLayoutNode(item, imageAlt);
         if (node) wrap.appendChild(node);
       }
@@ -990,7 +878,10 @@
 
     wrap.hidden = false;
     const renderMarkup = () => {
-      const primary = groups
+      const hidePrimary = groups.length === 1 && groups[0].hidePrimary;
+      const primary = hidePrimary
+        ? ""
+        : groups
         .map((groupItem) => {
           const activeClass = groupItem.key === selectedGroup.key ? "is-active" : "";
           return `<button type="button" class="menupage-variant-tab menupage-variant-tab-primary ${activeClass}" data-variant-group="${escapeHtml(
@@ -1009,8 +900,8 @@
         .join("");
 
       wrap.innerHTML = `
-        <div class="menupage-variant-row menupage-variant-row-primary">${primary}</div>
-        <div class="menupage-variant-row menupage-variant-row-secondary">${secondary}</div>
+        ${hidePrimary ? "" : `<div class="menupage-variant-row menupage-variant-row-primary">${primary}</div>`}
+        <div class="menupage-variant-row menupage-variant-row-secondary ${hidePrimary ? "menupage-variant-row-flat" : ""}">${secondary}</div>
       `;
     };
 
