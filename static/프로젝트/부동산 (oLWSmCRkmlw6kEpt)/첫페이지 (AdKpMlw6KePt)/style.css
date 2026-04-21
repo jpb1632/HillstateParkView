@@ -2187,6 +2187,19 @@ to {
   .properties-N5 .n5-lead-banner-wrap {
     width: 100%;
   }
+  .properties-N5 .n5-special-banner-wrap {
+    width: calc(100% + 3.2rem);
+    margin-left: -1.6rem;
+    margin-right: -1.6rem;
+    transform: none;
+  }
+  .properties-N5 .n5-special-banner {
+    border-radius: 0;
+  }
+  .properties-N5 .n5-special-banner img {
+    animation: none;
+    transform: none;
+  }
   .properties-N5 .n5-mobile-top-stack {
     display: block;
     margin: 0 0 2rem
