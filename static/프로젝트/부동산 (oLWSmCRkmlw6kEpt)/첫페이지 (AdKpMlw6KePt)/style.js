@@ -361,7 +361,9 @@
       }
 
       function bindConsultationShortcut() {
-        const $consultationLinks = $block.find(".header-reserve-link[href='#consultation']");
+        const $consultationLinks = $block
+          .find(".header-reserve-link[href='#consultation']")
+          .add($(".js-consultation-scroll"));
         if (!$consultationLinks.length) return;
 
         $consultationLinks.off("click.consultationShortcut").on("click.consultationShortcut", function(event) {
