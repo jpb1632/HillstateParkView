@@ -3,9 +3,10 @@
 힐스테이트 회룡역 파크뷰 분양 랜딩페이지 프로젝트입니다.
 전체 브랜딩, 메인/상세 구조, 반응형 동선, 상담 전환 흐름, 공유 메타데이터까지 회룡역 파크뷰에 맞게 정리한 완료 버전입니다.
 
-- 라이브 URL: `https://jpb1632.github.io/HillstateParkView/`
-- 저장소: `https://github.com/jpb1632/HillstateParkView`
-- 배포 방식: GitHub Pages
+- 운영 도메인: [힐스테이트회룡역파크뷰-대표.kr](https://xn----iv8en4m91f7vghoff4c440ar0bbyfq0al9i15i4zd.kr)
+- GitHub Pages URL: [jpb1632.github.io/HillstateParkView](https://jpb1632.github.io/HillstateParkView/)
+- 저장소: [github.com/jpb1632/HillstateParkView](https://github.com/jpb1632/HillstateParkView)
+- 배포 방식: GitHub Pages + Custom Domain
 
 ## 프로젝트 개요
 
