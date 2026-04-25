@@ -288,7 +288,7 @@
       design: {
         subtitle: "단지설계",
         copy: "양주의 새로운 중심에서 만나는",
-        copySub: "힐스테이트 파티오포레의 프리미엄 라이프!",
+        copySub: "힐스테이트 회룡역 파크뷰의 프리미엄 라이프!",
         image: "../resources/images/complex guide1.jpg",
       },
       community: {

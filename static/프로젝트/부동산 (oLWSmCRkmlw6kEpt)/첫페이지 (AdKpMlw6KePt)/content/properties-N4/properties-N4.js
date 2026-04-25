@@ -1,5 +1,5 @@
 (function() {
-  const POPUP_HIDE_KEY = "patioforet_popup_hide_until_v2";
+  const POPUP_HIDE_KEY = "hillstate_park_view_popup_hide_until_v2";
 
   function getTomorrowMidnight() {
     const now = new Date();
